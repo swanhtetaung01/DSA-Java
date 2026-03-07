@@ -45,8 +45,20 @@ public class LinkedList {
         length++;
     }
 
+    public void prepend(int value) {
+        Node newNode = new Node(value);
+        if(length == 0) {
+            head = newNode;
+            tail = newNode;
+        }else {
+        newNode.next = head;
+        head = newNode;
+        }
+        length++;
+    }
+
     public void removeLast() {
-        if(length == 0) throw new RuntimeException("LinkedList is null");
+        if(length == 0) throw new RuntimeException("LinkedList is already null");
         Node pointer = head;
         Node pre = head;
         while(pointer.next != null) {
@@ -58,6 +70,17 @@ public class LinkedList {
         length--;
         if(length == 0) {
             head = null;
+            tail = null;
+        }
+    }
+
+    public void removeFirst() {
+        if(length == 0) throw new RuntimeException("LinkedList is already null");
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+        length--;
+        if(length == 0) {
             tail = null;
         }
     }
