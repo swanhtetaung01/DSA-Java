@@ -6,11 +6,16 @@ public class LinkedList {
     private Node tail;
     private int length;
 
-    private static class Node {
+    class Node {
         int value;
         Node next;
         Node(int value) {
             this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
         }
     }
 
@@ -22,10 +27,38 @@ public class LinkedList {
     }
 
     public void printList() {
+        if (length == 0) System.out.println("null");
         Node temp = head;
         while(temp != null) {
             System.out.println(temp.value);
             temp = temp.next;
+        }
+    }
+
+    public void append(int value) {
+        Node newNode = new Node(value);
+        if(length == 0)
+            head = newNode;
+        else
+            tail.next = newNode;
+        tail = newNode;
+        length++;
+    }
+
+    public void removeLast() {
+        if(length == 0) throw new RuntimeException("LinkedList is null");
+        Node pointer = head;
+        Node pre = head;
+        while(pointer.next != null) {
+            pre = pointer;
+            pointer = pointer.next;
+        }
+        tail = pre;
+        tail.next = null;
+        length--;
+        if(length == 0) {
+            head = null;
+            tail = null;
         }
     }
 
