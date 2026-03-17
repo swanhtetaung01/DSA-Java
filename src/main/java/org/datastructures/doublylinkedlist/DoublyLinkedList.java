@@ -77,6 +77,31 @@ public class DoublyLinkedList {
         return temp;
     }
 
+    public Node get(int index) {
+        if(index >= length || index < 0) return null;
+        Node pointer = head;
+        if(index < length/2) {
+            for(int i = 0 ; i < index; i++) {
+                pointer = pointer.next;
+            }
+        }else {
+            pointer = tail;
+            for(int i = length - 1 ; i > index; i--) {
+                pointer = pointer.prev;
+            }
+        }
+        return pointer;
+    }
+
+    public boolean set(int index, int value) {
+        Node pointer = get(index);
+        if(pointer != null) {
+            pointer.value = value;
+            return true;
+        }
+        return false;
+    }
+
     public void printList() {
         Node temp = head;
         while(temp != null) {
